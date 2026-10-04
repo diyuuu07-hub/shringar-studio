@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shringar Studio & Academy | Luxury Makeup & Artistry</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shringar: {
+                            50: '#fff5f7',
+                            100: '#ffe4ec',
+                            200: '#fecddb',
+                            300: '#f9a8c4',
+                            400: '#f4729f',
+                         a   500: '#e13d77',
+                            600: '#cb215f',
+                            700: '#ab174e',
+                            800: '#8e1642',
+                            900: '#78153b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .academy-gradient {
+            background: linear-gradient(135deg, #e13d77 0%, #78153b 100%);
+        }
+    </style>
+</head>
+<body class="bg-shringar-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-shringar-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-full bg-shringar-600 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-crown text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-gray-900">Shringar Studio</span>
+                    <span class="block text-xs uppercase tracking-widest text-shringar-600 font-semibold">Makeup & Academy</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-7">
+                <button onclick="switchTab('home')" class="nav-btn text-shringar-600 font-semibold transition" data-tab="home">Home</button>
+                <button onclick="switchTab('about')" class="nav-btn text-gray-600 font-medium hover:text-shringar-600 transition" data-tab="about">About Us</button>
+                <button onclick="switchTab('services')" class="nav-btn text-gray-600 font-medium hover:text-shringar-600 transition" data-tab="services">Services & Gallery</button>
+                <button onclick="switchTab('learn')" class="nav-btn text-gray-600 font-medium hover:text-shringar-600 transition" data-tab="learn">Learn Makeup</button>
+                <button onclick="switchTab('contact')" class="nav-btn text-gray-600 font-medium hover:text-shringar-600 transition" data-tab="contact">Contact</button>
+                <button onclick="switchTab('mybookings')" class="nav-btn text-gray-600 font-medium hover:text-shringar-600 transition flex items-center gap-1.5" data-tab="mybookings">
+                    <i class="fa-solid fa-receipt text-xs"></i> My Bookings
+                </button>
+            </nav>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <div class="flex items-center space-x-2 bg-shringar-100/70 px-3.5 py-1.5 rounded-full border border-shringar-200">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="text-xs font-semibold text-shringar-800">diyasaini.gmail.com</span>
+                </div>
+                <button onclick="openBookingModal()" class="bg-shringar-600 text-white px-5 py-2.5 rounded-full font-medium shadow-md hover:bg-shringar-700 transition transform hover:-translate-y-0.5">
+                    Book Now
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 focus:outline-none p-2">
+                <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-shringar-100 px-4 pt-2 pb-4 space-y-2">
+            <div class="py-2 px-3 bg-shringar-50 rounded-lg text-xs font-medium text-shringar-800 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-user-circle"></i> diyasaini.gmail.com
+            </div>
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">Home</button>
+            <button onclick="switchTab('about'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">About Us</button>
+            <button onclick="switchTab('services'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">Services & Gallery</button>
+            <button onclick="switchTab('learn'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">Learn Makeup</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">Contact</button>
+            <button onclick="switchTab('mybookings'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-md hover:bg-shringar-50 font-medium">My Bookings</button>
+            <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full mt-2 bg-shringar-600 text-white py-2.5 rounded-lg font-medium text-center">Book Now</button>
+        </div>
+    </header>
+
+    <!-- Main Content Tabs -->
+    <main class="flex-grow">
+
+        <!-- TAB 1: HOME -->
+        <div id="tab-home" class="tab-content">
+            <!-- Hero Section -->
+            <section class="hero-gradient text-white py-28 px-4 sm:px-6 lg:px-8 text-center relative flex items-center justify-center min-h-[600px]">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <span class="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-shringar-100 border border-white/30">
+                        Luxury Bridal Studio & Professional Academy
+                    </span>
+                    <h1 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
+                        Enhance Your Natural Beauty with Shringar Studio
+                    </h1>
+                    <p class="text-lg text-shringar-100 max-w-xl mx-auto font-light">
+                        From basic everyday looks starting at ₹1,500 to royal bridal transformations and professional makeup classes.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                        <button onclick="switchTab('services')" class="w-full sm:w-auto bg-shringar-600 hover:bg-shringar-700 text-white font-medium px-8 py-3.5 rounded-full shadow-lg transition transform hover:-translate-y-0.5">
+                            View Services & Gallery
+                        </button>
+                        <button onclick="switchTab('learn')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-medium px-8 py-3.5 rounded-full border border-white/30 transition">
+                            Learn Makeup Courses
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlights Section -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">Why Choose Shringar</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2">The Art of Flawless Elegance</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-shringar-100 text-center hover:shadow-md transition">
+                        <div class="w-14 h-14 bg-shringar-100 text-shringar-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-xl">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-2">Affordable Luxury</h3>
+                        <p class="text-gray-600 text-sm">Basic elegant looks starting at just ₹1,500 with premium branded products.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-shringar-100 text-center hover:shadow-md transition">
+                        <div class="w-14 h-14 bg-shringar-100 text-shringar-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-xl">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-2">Certified Academy</h3>
+                        <p class="text-gray-600 text-sm">Learn professional techniques step-by-step with practical guidance and certification.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-shringar-100 text-center hover:shadow-md transition">
+                        <div class="w-14 h-14 bg-shringar-100 text-shringar-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-xl">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-2">Skin-Safe Products</h3>
+                        <p class="text-gray-600 text-sm">Dermatologically tested international luxury cosmetics for a glowing, weightless finish.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TAB 2: ABOUT US -->
+        <div id="tab-about" class="tab-content hidden py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">About Shringar Studio</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                        Crafting Timeless Beauty & Empowering Artists
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Founded by master makeup artist Priya Saini, <strong>Shringar Studio</strong> has become the ultimate destination for bridal transformations, party glam, and professional makeup education. We believe every individual possesses a unique radiance that deserves to be highlighted with precision and artistry.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Whether you are preparing for your wedding day or wanting to master the craft through our academy, our team ensures a luxurious, comfortable, and unforgettable experience.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="bg-white p-6 rounded-2xl border border-shringar-100 shadow-sm">
+                            <div class="text-3xl font-bold font-serif text-shringar-600 mb-1">5,000+</div>
+                            <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Happy Clients</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-shringar-100 shadow-sm">
+                            <div class="text-3xl font-bold font-serif text-shringar-600 mb-1">1,200+</div>
+                            <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Students Trained</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop" alt="Studio Studio Interior" class="w-full h-[450px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-shringar-600 text-white p-6 rounded-2xl shadow-xl max-w-xs hidden sm:block">
+                        <p class="font-serif italic text-sm">"Beauty is about enhancing what you have. Let yourself sparkle effortlessly."</p>
+                        <span class="block text-xs uppercase tracking-widest mt-2 font-semibold">— Priya Saini, Founder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SERVICES & GALLERY -->
+        <div id="tab-services" class="tab-content hidden py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">Our Menu & Portfolio</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2">Services & Photo Gallery</h2>
+                <p class="text-gray-600 mt-2">Explore our professional makeup packages starting at just ₹1,500 and browse our recent studio works.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Dynamically Populated -->
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="border-t border-shringar-100 pt-16">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold">Studio Portfolio</h3>
+                    <p class="text-gray-500 text-sm mt-1">A glimpse into our signature bridal and party makeovers.</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="rounded-2xl overflow-hidden h-48 shadow-sm group relative">
+                        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-48 shadow-sm group relative">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-48 shadow-sm group relative">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-48 shadow-sm group relative">
+                        <img src="https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: LEARN MAKEUP ACADEMY -->
+        <div id="tab-learn" class="tab-content hidden py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">Shringar Makeup Academy</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2">Learn Professional Makeup Artistry</h2>
+                <p class="text-gray-600 mt-2">Master skin prep, eye contouring, and bridal artistry through our structured video lessons.</p>
+            </div>
+
+            <!-- Academy Student Banner -->
+            <div class="academy-gradient rounded-3xl text-white p-8 sm:p-12 mb-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 max-w-xl">
+                    <span class="bg-white/20 text-xs px-3 py-1 rounded-full uppercase font-semibold tracking-wider">Enrolled Student Pass</span>
+                    <h3 class="font-serif text-3xl font-bold">Full Academy Access Unlocked</h3>
+                    <p class="text-shringar-100 text-sm leading-relaxed">
+                        Your registered account (<span class="font-semibold underline">diyasaini.gmail.com</span>) has lifetime access to all masterclasses, downloadable PDFs, and practice guides.
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[220px]">
+                    <div class="text-3xl font-bold mb-1">5 Lessons</div>
+                    <div class="text-xs text-shringar-200 uppercase tracking-wider mb-4">Ready to Watch</div>
+                    <button onclick="playLesson('Basic Everyday Glow Masterclass', 'https://www.youtube.com/embed/dQw4w9WgXcQ')" class="w-full bg-white text-shringar-800 font-semibold py-2.5 rounded-xl shadow hover:bg-shringar-50 transition text-sm">
+                        Start Learning Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lessons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="lessons-grid">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+
+        <!-- TAB 5: CONTACT US -->
+        <div id="tab-contact" class="tab-content hidden py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2">Contact Shringar Studio</h2>
+                <p class="text-gray-600 mt-2">Have questions about bridal dates or academy admissions? Send us a message.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-shringar-100">
+                <div class="space-y-6">
+                    <h3 class="font-serif text-2xl font-bold text-gray-900">Studio Details</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Visit our luxury studio for personal consultations, trial sessions, and professional enrollments.
+                    </p>
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-shringar-100 text-shringar-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900">Location</h4>
+                                <p class="text-gray-600 text-sm">Luxury Makeup Studio, Main Boulevard, New Delhi, India</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-shringar-100 text-shringar-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900">Email</h4>
+                                <p class="text-gray-600 text-sm">contact@shringarstudio.com (Account: diyasaini.gmail.com)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-shringar-100 text-shringar-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900">Phone</h4>
+                                <p class="text-gray-600 text-sm">+91 98765 43210 / +91 91234 56789</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Your Name</label>
+                        <input type="text" required value="Diya Saini" class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/40">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Gmail Address</label>
+                        <input type="email" required value="diyasaini.gmail.com" readonly class="w-full px-4 py-3 rounded-xl border border-shringar-200 bg-gray-100 text-gray-600 text-sm cursor-not-allowed">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Message / Inquiry</label>
+                        <textarea rows="4" required placeholder="Type your query here..." class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/40"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-shringar-600 hover:bg-shringar-700 text-white font-medium py-3.5 rounded-xl shadow transition">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 6: MY BOOKINGS -->
+        <div id="tab-mybookings" class="tab-content hidden py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <span class="text-shringar-600 font-semibold text-sm uppercase tracking-wider">Appointments</span>
+                    <h2 class="font-serif text-3xl font-bold mt-1">My Bookings</h2>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-gray-500 block">Logged-in Account:</span>
+                    <span class="text-sm font-bold text-shringar-700">diyasaini.gmail.com</span>
+                </div>
+            </div>
+
+            <div id="bookings-list" class="space-y-4">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- AI Booking Assistant Widget (Chatbot) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Toggle Button -->
+        <button id="ai-toggle-btn" onclick="toggleAiChat()" class="w-14 h-14 bg-shringar-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-shringar-700 transition transform hover:scale-105 relative group">
+            <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+            <span class="absolute right-16 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-xl shadow-md opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
+                Ask AI Booking Bot ✨
+            </span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="ai-chat-window" class="hidden absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-shringar-100 overflow-hidden flex flex-col h-[480px]">
+            <!-- Header -->
+            <div class="academy-gradient p-4 text-white flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base">Shringar AI Assistant</h4>
+                        <span class="text-xs text-shringar-100 flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-green-400"></span> Online • Ready to book
+                        </span>
+                    </div>
+                </div>
+                <button onclick="toggleAiChat()" class="text-white/80 hover:text-white p-1.5">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Messages Area -->
+            <div id="ai-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-shringar-50/50 text-sm">
+                <div class="flex items-start space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-shringar-600 text-white flex items-center justify-center flex-shrink-0 text-xs">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-shringar-100 text-gray-700 max-w-[80%]">
+                        Namaste Diya! I'm your Shringar AI Assistant. Looking for a basic look (₹1,500), bridal makeup, or want to book an appointment? Tell me what you need!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Suggestions -->
+            <div class="px-3 py-2 bg-white border-t border-shringar-100 flex gap-2 overflow-x-auto text-xs">
+                <button onclick="sendAiQuickPrompt('Book Simple Basic Look ₹1500')" class="bg-shringar-50 hover:bg-shringar-100 text-shringar-700 px-3 py-1 rounded-full border border-shringar-200 whitespace-nowrap">
+                    ✨ Book Basic Look (₹1,500)
+                </button>
+                <button onclick="sendAiQuickPrompt('Tell me about bridal makeup')" class="bg-shringar-50 hover:bg-shringar-100 text-shringar-700 px-3 py-1 rounded-full border border-shringar-200 whitespace-nowrap">
+                    👑 Bridal Packages
+                </button>
+                <button onclick="sendAiQuickPrompt('How to join academy?')" class="bg-shringar-50 hover:bg-shringar-100 text-shringar-700 px-3 py-1 rounded-full border border-shringar-200 whitespace-nowrap">
+                    🎓 Academy Info
+                </button>
+            </div>
+
+            <!-- Input Box -->
+            <div class="p-3 bg-white border-t border-shringar-100 flex items-center gap-2">
+                <input type="text" id="ai-input" placeholder="Type your request or ask for booking..." class="flex-grow px-4 py-2.5 rounded-xl border border-shringar-200 focus:outline-none focus:ring-2 focus:ring-shringar-500 text-sm bg-shringar-50/50" onkeypress="if(event.key==='Enter') sendAiMessage()">
+                <button onclick="sendAiMessage()" class="w-10 h-10 bg-shringar-600 hover:bg-shringar-700 text-white rounded-xl flex items-center justify-center shadow transition flex-shrink-0">
+                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-shringar-100 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full bg-shringar-50 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-widest text-shringar-600 font-semibold">Secure Appointment</span>
+                <h3 id="modal-service-title" class="font-serif text-2xl font-bold text-gray-900 mt-1">Book Makeup Service</h3>
+                <p id="modal-service-price" class="text-shringar-600 font-semibold mt-0.5"></p>
+            </div>
+
+            <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <input type="hidden" id="service-id-input">
+                
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
+                    <input type="text" id="booker-name" required value="Diya Saini" class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/50">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Gmail Address</label>
+                    <div class="relative">
+                        <input type="email" id="booker-email" required value="diyasaini.gmail.com" readonly class="w-full px-4 py-3 rounded-xl border border-shringar-200 bg-gray-100 text-gray-600 text-sm cursor-not-allowed">
+                        <span class="absolute right-3 top-3.5 text-xs text-shringar-600 font-medium bg-shringar-100 px-2 py-0.5 rounded">Pre-filled</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Appointment Date</label>
+                        <input type="date" id="booker-date" required class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Preferred Time</label>
+                        <select id="booker-time" required class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/50">
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="02:30 PM">02:30 PM</option>
+                            <option value="04:30 PM">04:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Special Notes / Outfit Theme</label>
+                    <textarea id="booker-notes" rows="3" placeholder="E.g., Traditional lehenga, pink lipstick preference..." class="w-full px-4 py-3 rounded-xl border border-shringar-200 focus:ring-2 focus:ring-shringar-500 focus:outline-none text-sm bg-shringar-50/50"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-shringar-600 hover:bg-shringar-700 text-white font-medium py-3.5 rounded-xl shadow-lg transition mt-2">
+                    Confirm Booking (Pay at Studio)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lesson Video Player Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full bg-shringar-50 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="video-modal-title" class="font-serif text-xl font-bold text-gray-900 mb-4">Lesson Video</h3>
+            <div class="aspect-video bg-gray-900 rounded-2xl overflow-hidden mb-4 shadow-inner">
+                <iframe id="lesson-iframe" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="text-xs text-gray-500 text-center"><i class="fa-solid fa-circle-info text-shringar-600"></i> Practice along with your kit and share photos with diyasaini.gmail.com!</p>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 transform -translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-3.5 rounded-2xl shadow-xl flex items-center space-x-3 text-sm">
+        <i id="toast-icon" class="fa-solid fa-check-circle text-green-400"></i>
+        <span id="toast-message">Success message</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-shringar-100 py-12 mt-20 text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <div class="flex items-center justify-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-shringar-600 flex items-center justify-center text-white text-xs">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <span class="font-serif text-lg font-bold text-gray-800">Shringar Studio & Academy</span>
+            </div>
+            <p>Connected Account: <strong class="text-shringar-700">diyasaini.gmail.com</strong></p>
+            <p class="text-xs text-gray-400">&copy; 2026 Shringar Studio Artistry. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Application JavaScript -->
+    <script>
+        // Services Data with ₹1,500 basic look & others
+        const servicesData = [
+            {
+                id: 's1',
+                title: 'Simple Basic Makeup Look',
+                category: 'Basic',
+                price: '₹1,500',
+                duration: '45 mins',
+                description: 'Clean base, subtle eye makeup, nude lipstick, and neat hairdressing for everyday outings & small gatherings.',
+                image: 'https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?q=80&w=800&auto=format&fit=crop'
+            },
+            {
+                id: 's2',
+                title: 'Party & Cocktail Glamour',
+                category: 'Party',
+                price: '₹3,500',
+                duration: '60 mins',
+                description: 'Glitter eyeshadow, HD foundation, contouring, and bold lips tailored for evening parties and receptions.',
+                image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop'
+            },
+            {
+                id: 's3',
+                title: 'Royal Bridal Transformation',
+                category: 'Bridal',
+                price: '₹8,500',
+                duration: '120 mins',
+                description: 'Complete airbrush/HD bridal makeup including heavy lashes, skin prep, draping, and intricate hairstyling.',
+                image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop'
+            },
+            {
+                id: 's4',
+                title: 'Engagement & Mehendi Look',
+                category: 'Traditional',
+                price: '₹5,000',
+                duration: '90 mins',
+                description: 'Fresh floral-complementary vibrant makeup with waterproof formulation for joyful daylight celebrations.',
+                image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop'
+            },
+            {
+                id: 's5',
+                title: 'Editorial Photoshoot Glam',
+                category: 'Editorial',
+                price: '₹6,000',
+                duration: '90 mins',
+                description: 'Camera-ready high definition professional makeup designed to pop under studio lights.',
+                image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop'
+            },
+            {
+                id: 's6',
+                title: 'Personal Makeup Consultation',
+                category: 'Academy',
+                price: '₹2,500',
+                duration: '60 mins',
+                description: 'One-on-one session with our senior artist to audit your makeup kit and learn personalized face-shape techniques.',
+                image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=800&auto=format&fit=crop'
+            }
+        ];
+
+        // Academy Lessons Data
+        const lessonsData = [
+            {
+                id: 'l1',
+                title: 'Basic Skin Prep & Foundation Mastery',
+                level: 'Beginner',
+                duration: '25 mins',
+                instructor: 'Priya Saini',
+                thumbnail: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            },
+            {
+                id: 'l2',
+                title: 'Everyday Simple Look (₹1,500 style)',
+                level: 'Beginner',
+                duration: '30 mins',
+                instructor: 'Priya Saini',
+                thumbnail: 'https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?q=80&w=600&auto=format&fit=crop',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            },
+            {
+                id: 'l3',
+                title: 'Smokey Eyes & Winged Eyeliner Guide',
+                level: 'Intermediate',
+                duration: '35 mins',
+                instructor: 'Neha Sharma',
+                thumbnail: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            },
+            {
+                id: 'l4',
+                title: 'Bridal HD Contouring & Highlighting',
+                level: 'Advanced',
+                duration: '50 mins',
+                instructor: 'Priya Saini',
+                thumbnail: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=600&auto=format&fit=crop',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            }
+        ];
+
+        // User Bookings initialized for diyasaini.gmail.com
+        let userBookings = [
+            {
+                id: 'SH-8492',
+                serviceTitle: 'Simple Basic Makeup Look',
+                price: '₹1,500',
+                date: '2026-06-20',
+                time: '11:00 AM',
+                email: 'diyasaini.gmail.com',
+                name: 'Diya Saini',
+                status: 'Confirmed'
+            }
+        ];
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.tab === tabId) {
+                    btn.classList.add('text-shringar-600', 'font-semibold');
+                    btn.classList.remove('text-gray-600');
+                } else {
+                    btn.classList.remove('text-shringar-600', 'font-semibold');
+                    btn.classList.add('text-gray-600');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'services') renderServices();
+            if (tabId === 'learn') renderLessons();
+            if (tabId === 'mybookings') renderBookings();
+        }
+
+        // Render Services
+        function renderServices() {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = servicesData.map(service => `
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-shringar-100 flex flex-col hover:shadow-lg transition">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover transform hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/e13d77/ffffff?text=Shringar+Service'">
+                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-shringar-700 shadow">
+                            ${service.category}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-gray-900">${service.title}</h3>
+                            <span class="text-shringar-600 font-bold text-lg">${service.price}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow">${service.description}</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-shringar-50 mt-auto">
+                            <span class="text-xs text-gray-400 flex items-center gap-1">
+                                <i class="fa-regular fa-clock"></i> ${service.duration}
+                            </span>
+                            <button onclick="openBookingModalForService('${service.id}')" class="bg-shringar-600 hover:bg-shringar-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Lessons
+        function renderLessons() {
+            const grid = document.getElementById('lessons-grid');
+            grid.innerHTML = lessonsData.map(lesson => `
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-shringar-100 flex flex-col hover:shadow-lg transition">
+                    <div class="h-48 overflow-hidden relative group cursor-pointer" onclick="playLesson('${lesson.title}', '${lesson.videoUrl}')">
+                        <img src="${lesson.thumbnail}" alt="${lesson.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <div class="w-12 h-12 bg-shringar-600 rounded-full flex items-center justify-center text-white text-lg shadow-lg">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </div>
+                        </div>
+                        <span class="absolute top-4 right-4 bg-gray-900/80 backdrop-blur-md text-white px-2.5 py-1 rounded-full text-xs font-medium">
+                            ${lesson.level}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="text-xs text-shringar-600 font-semibold mb-1">Instructor: ${lesson.instructor}</div>
+                        <h3 class="font-serif text-lg font-bold text-gray-900 mb-2">${lesson.title}</h3>
+                        <div class="flex items-center justify-between pt-4 border-t border-shringar-50 mt-auto">
+                            <span class="text-xs text-gray-400 flex items-center gap-1">
+                                <i class="fa-solid fa-video"></i> ${lesson.duration}
+                            </span>
+                            <button onclick="playLesson('${lesson.title}', '${lesson.videoUrl}')" class="text-shringar-600 hover:text-shringar-700 text-xs font-semibold flex items-center gap-1">
+                                Watch Video <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Bookings List
+        function renderBookings() {
+            const container = document.getElementById('bookings-list');
+            if (userBookings.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-3xl p-12 text-center border border-shringar-100">
+                        <div class="w-16 h-16 bg-shringar-50 text-shringar-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-800">No active bookings found</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-6">Book your makeup appointment starting at ₹1,500.</p>
+                        <button onclick="switchTab('services')" class="bg-shringar-600 text-white font-medium px-6 py-2.5 rounded-full text-sm shadow">
+                            Browse Services
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userBookings.map(b => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-shringar-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-shringar-600 bg-shringar-50 px-2.5 py-0.5 rounded">${b.id}</span>
+                            <span class="text-xs text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded"><i class="fa-solid fa-check"></i> ${b.status}</span>
+                        </div>
+                        <h4 class="font-serif text-lg font-bold text-gray-900">${b.serviceTitle}</h4>
+                        <p class="text-xs text-gray-500"><i class="fa-regular fa-calendar"></i> ${b.date} at ${b.time} &bull; Account: <span class="text-shringar-700 font-medium">${b.email}</span></p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                        <span class="text-base font-bold text-shringar-700 mr-2">${b.price}</span>
+                        <button onclick="cancelBooking('${b.id}')" class="text-red-500 hover:text-red-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-50 transition">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Controls
+        function openBookingModalForService(serviceId) {
+            const service = servicesData.find(s => s.id === serviceId);
+            if (!service) return;
+
+            document.getElementById('service-id-input').value = service.id;
+            document.getElementById('modal-service-title').innerText = service.title;
+            document.getElementById('modal-service-price').innerText = `${service.price} (${service.duration})`;
+            
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('booker-date').valueAsDate = tomorrow;
+            document.getElementById('booker-email').value = 'diyasaini.gmail.com';
+
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function openBookingModal() {
+            openBookingModalForService('s1');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            const serviceId = document.getElementById('service-id-input').value;
+            const service = servicesData.find(s => s.id === serviceId) || servicesData[0];
+            const name = document.getElementById('booker-name').value;
+            const email = document.getElementById('booker-email').value; // diyasaini.gmail.com
+            const date = document.getElementById('booker-date').value;
+            const time = document.getElementById('booker-time').value;
+
+            const newBooking = {
+                id: 'SH-' + Math.floor(1000 + Math.random() * 9000),
+                serviceTitle: service.title,
+                price: service.price,
+                date: date,
+                time: time,
+                email: email,
+                name: name,
+                status: 'Confirmed'
+            };
+
+            userBookings.unshift(newBooking);
+            closeBookingModal();
+            showToast(`Successfully booked ${service.title} (${service.price}) for diyasaini.gmail.com!`);
+            switchTab('mybookings');
+        }
+
+        function cancelBooking(id) {
+            userBookings = userBookings.filter(b => b.id !== id);
+            showToast('Booking cancelled successfully.');
+            renderBookings();
+        }
+
+        // Contact Form Handler
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Message sent successfully! We will contact diyasaini.gmail.com shortly.');
+            e.target.reset();
+        }
+
+        // Video Player Modal
+        function playLesson(title, url) {
+            document.getElementById('video-modal-title').innerText = title;
+            document.getElementById('lesson-iframe').src = url;
+            document.getElementById('video-modal').classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('lesson-iframe').src = '';
+            document.getElementById('video-modal').classList.add('hidden');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // AI Chatbot Logic
+        function toggleAiChat() {
+            const chatWindow = document.getElementById('ai-chat-window');
+            chatWindow.classList.toggle('hidden');
+        }
+
+        function sendAiQuickPrompt(promptText) {
+            document.getElementById('ai-input').value = promptText;
+            sendAiMessage();
+        }
+
+        function sendAiMessage() {
+            const inputEl = document.getElementById('ai-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            const messagesContainer = document.getElementById('ai-messages');
+            
+            // Append User message
+            messagesContainer.innerHTML += `
+                <div class="flex items-start space-x-2 justify-end">
+                    <div class="bg-shringar-600 text-white p-3.5 rounded-2xl shadow-sm text-gray-100 max-w-[80%]">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            inputEl.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Generate AI Response
+            setTimeout(() => {
+                let aiReply = "I can definitely help you with that! Would you like to book our Simple Basic Look for ₹1,500 or explore our bridal packages?";
+                
+                const lower = text.toLowerCase();
+                if (lower.includes('1500') || lower.includes('basic') || lower.includes('simple')) {
+                    aiReply = "Our Simple Basic Makeup Look is priced at ₹1,500 (Duration: 45 mins). Shall I book this for your account diyasaini.gmail.com?";
+                    setTimeout(() => openBookingModalForService('s1'), 1000);
+                } else if (lower.includes('bridal')) {
+                    aiReply = "Our Royal Bridal Transformation is priced at ₹8,500 including HD airbrush, draping, and styling. Click 'Book Now' on services to schedule!";
+                } else if (lower.includes('academy') || lower.includes('learn')) {
+                    aiReply = "You have full student access to our Academy under diyasaini.gmail.com! Head over to the 'Learn Makeup' tab to watch video lessons.";
+                } else if (lower.includes('book')) {
+                    aiReply = "Opening the booking calendar for you right now!";
+                    setTimeout(() => openBookingModal(), 800);
+                }
+
+                messagesContainer.innerHTML += `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-shringar-600 text-white flex items-center justify-center flex-shrink-0 text-xs">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-shringar-100 text-gray-700 max-w-[80%]">
+                            ${aiReply}
+                        </div>
+                    </div>
+                `;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 600);
+        }
+
+        // Toast notification helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('-translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('-translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        window.onload = function() {
+            // Initialized on Home tab
+        };
+    </script>
+</body>
+</html>
